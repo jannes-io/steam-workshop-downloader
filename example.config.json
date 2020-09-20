@@ -1,0 +1,17 @@
+{
+  "username": "somefakename",
+  "password": "somefakepassword",
+  "steamCMD": "(C:)\\path\\to\\steamcmd(.exe)",
+  "outDir": "(C:)\\path\\to\\mods",
+  "appid": "107410",
+  "workshopItems": {
+    "@cba": "450814997",
+    "@ace3": "463939057"
+  },
+  "includes": {
+    "@ace3": [
+      "optionals\\@ace_realisticdispersion",
+      "optionals\\@ace_particles"
+    ]
+  }
+}

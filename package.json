@@ -1,0 +1,11 @@
+{
+  "name": "workshop-downloader",
+  "version": "1.0.0",
+  "description": "Steam workshop downloader",
+  "main": "index.js",
+  "author": "Jannes Drijkoningen <jannesdrijkoningen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "shelljs": "^0.8.4"
+  }
+}
