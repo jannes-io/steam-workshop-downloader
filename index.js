@@ -3,8 +3,8 @@ const config = require('./config.json');
 
 const path = sh.pwd().stdout;
 
-const CACHE_DIR = path + '\\cache';
-const COMMAND_PATH = CACHE_DIR + '\\steamcommand';
+const CACHE_DIR = `${path}\\cache`;
+const COMMAND_PATH = `${CACHE_DIR}\\steamcommand`;
 const MOD_DIR = `${config.outDir}\\mods`
 
 const cleanDirectories = () => {
