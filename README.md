@@ -9,7 +9,9 @@ Have [node >12](https://nodejs.org/en/) installed
 and be somewhat familiar with [json](https://www.json.org/json-en.html), although these docs should be noob-proof.
 
 ## Usage
-Copy `config.example.json` to `config.json` and edit values to fit your needs.
+Copy or rename `example.config.json` to `config.json` and edit values to fit your needs.
+
+Install the script dependencies by running `npm install`.
 
 Then run `node index.js` to start downloading your selected workshop items.
 
