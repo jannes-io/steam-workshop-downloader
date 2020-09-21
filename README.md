@@ -1,8 +1,14 @@
 # Steam Workshop Item Downloader
+<p align="center">
+    <img width="300" height="300" src="https://lh5.googleusercontent.com/u_m260bf8KfZbdlNwSwh_rXnE6QniyfroKI8jDawnXtoTxcI4Ctj8L1H22CNkPKxVfivZri7xswTFQKjSFLRpPrhfuFuc03K59xqix0fvJm26rC4xMQObAJMQxrCHf0kzSv3E4pF">
+</p>
+
 This cross platform nodejs script is intended for Arma 3 server admins to simplify mod installations. The script can also be used for other games.
 
 Say goodbye to manually writing your mod include list, goodbye to individual workshop download batch/sh files,
 this script does it all. Run this bad boy on a schedule and always have your servers up to date!
+
+Originally crafted by [J.Drake](https://3rdinf.us/perscom/personnel/soldier/418-jannes-drake/) and the Corps Of Engineers in [Third Infantry Division](https://3rdinf.us).
 
 ## Features
 - Automatically download Steam workshop items,
@@ -22,20 +28,20 @@ Clone or download this repository.
 
 Copy or rename `example.config.json` to `config.json` and edit values to fit your needs, see "Configuration" section for more info.
 
-Open cmd, PowerShell or any terminal of your choice and run the following commands:
+Open cmd, PowerShell or any terminal of your choice, navigate to where you downloaded this repository, and run the following commands:
 ```console
 npm install
 npm run build
 ```
 
 #### Running
-Run `npm run sync` to start downloading your selected workshop items.
+Run `npm run sync` inside of this folder to start downloading your selected workshop items.
 
 #### Using modlist for Arma 3 Server
 Instead of having `-mod=@mod1;@mod2` as launch param, use `-par=<outDir from config.json>\modlist` 
 for example: 
 ```
-arma3server.exe -port=2302 -config=config\server.cfg -par=C:\Arma3\Workshop\modlist
+C:\Arma3\Servers\Server1\arma3server_64.exe -port=2302 -config=config\server.cfg -par=C:\Arma3\Workshop\modlist
 ```
 
 ## Configuration
