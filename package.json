@@ -2,10 +2,21 @@
   "name": "workshop-downloader",
   "version": "1.0.0",
   "description": "Steam workshop downloader",
-  "main": "index.js",
   "author": "Jannes Drijkoningen <jannesdrijkoningen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "sync": "node dist/sync.js",
+    "build": "tsc",
+    "watch-ts": "tsc -w"
+  },
   "dependencies": {
-    "shelljs": "^0.8.4"
+    "@types/form-data": "^2.5.0",
+    "@types/node": "^14.11.1",
+    "@types/node-fetch": "^2.5.7",
+    "@types/shelljs": "^0.8.8",
+    "form-data": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "shelljs": "^0.8.4",
+    "typescript": "^4.0.3"
   }
 }
