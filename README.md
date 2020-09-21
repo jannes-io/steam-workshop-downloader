@@ -31,6 +31,13 @@ npm run build
 #### Running
 Run `npm run sync` to start downloading your selected workshop items.
 
+#### Using modlist for Arma 3 Server
+Instead of having `-mod=@mod1;@mod2` as launch param, use `-par=<outDir from config.json>\modlist` 
+for example: 
+```
+arma3server.exe -port=2302 -config=config\server.cfg -par=C:\Arma3\Workshop\modlist
+```
+
 ## Configuration
 We highly recommend running this script on an isolated steam account rather than a personal account.
 You must also **either disable steam guard, or run and log in to steamcmd at least once** to cache the steam guard code.
