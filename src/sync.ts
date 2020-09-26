@@ -40,7 +40,10 @@ const sync = async () => {
   const modIdList = Object.values(config.workshopItems);
   const steamItems = await getFileDetails(modIdList);
 
-  const requireUpdates = steamItems.filter(({ time_updated }) => time_updated * 1000 > manifest.lastRun);
+  const requireUpdates = steamItems.filter(({
+    time_updated,
+    publishedfileid,
+  }) => time_updated * 1000 > manifest.lastRun || !manifest.modList.includes(publishedfileid));
 
   if (requireUpdates.length > 0) {
     requireUpdates.forEach(({ title }) => console.log(`${title} requires update.`));

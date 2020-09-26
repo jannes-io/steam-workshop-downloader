@@ -18,6 +18,7 @@ interface IConfig {
 
 interface IManifest {
   lastRun: number;
+  modList: string[];
 }
 
 interface ISteamWorkshopItem {
