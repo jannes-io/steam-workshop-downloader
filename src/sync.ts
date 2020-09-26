@@ -52,10 +52,13 @@ const sync = async () => {
   } else {
     console.log('Nothing to update...')
   }
+
+  return requireUpdates;
 };
 
-sync().then(() => {
+sync().then((updatedMods) => {
   manifest.lastRun = (new Date()).valueOf();
+  manifest.modList = updatedMods.map(({ publishedfileid }) => publishedfileid);
   sh.ShellString(JSON.stringify(manifest)).to(`${currDir}\\manifest`);
   console.log('Mod updates completed.');
 });
