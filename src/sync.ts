@@ -53,7 +53,7 @@ const sync = async () => {
     console.log('Nothing to update...')
   }
 
-  return requireUpdates;
+  return steamItems;
 };
 
 sync().then((updatedMods) => {
