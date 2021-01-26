@@ -29,7 +29,7 @@ force_install_dir ${cacheDir}
 `).to(commandPath);
 
   modIdList.forEach(({ publishedfileid }) => {
-    sh.ShellString(`workshop_download_item ${config.appid} ${publishedfileid}\n`).toEnd(commandPath);
+    sh.ShellString(`workshop_download_item ${config.appid} ${publishedfileid} validate\n`).toEnd(commandPath);
   });
 
   sh.ShellString('quit').toEnd(commandPath);
