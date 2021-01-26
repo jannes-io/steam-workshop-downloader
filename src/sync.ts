@@ -60,6 +60,6 @@ const sync = async () => {
 sync().then((updatedMods) => {
   manifest.lastRun = (new Date()).valueOf();
   manifest.modList = updatedMods.map(({ publishedfileid }) => publishedfileid);
-  sh.ShellString(JSON.stringify(manifest)).to(`${currDir}\\manifest`);
+  sh.ShellString(JSON.stringify(manifest)).to(path.join(currDir, 'manifest'));
   console.log('Mod updates completed.');
 });
