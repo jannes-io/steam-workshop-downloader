@@ -1,10 +1,5 @@
-interface IWorkshopItems {
-  [name: string]: string;
-}
-
-interface IIncludes {
-  [name: string]: string[];
-}
+type WorkshopItems = Record<string, string>;
+type Includes = Record<keyof WorkshopItems, string[]>;
 
 interface IConfig {
   username: string;
@@ -12,8 +7,8 @@ interface IConfig {
   steamCMD: string;
   outDir: string;
   appid: string;
-  workshopItems: IWorkshopItems;
-  includes: IIncludes;
+  workshopItems: WorkshopItems;
+  includes: Includes;
 }
 
 interface IManifest {
