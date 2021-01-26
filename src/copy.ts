@@ -40,7 +40,7 @@ const generateModlist = () => {
 
   if (NO_COPY) {
     const dir = path.join(cacheDir, 'steamapps', 'workshop', 'content', config.appid);
-    modList += Object.values(config.workshopItems).map((workshopId) => `${dir}\\${workshopId}`).join(';');
+    modList += Object.values(config.workshopItems).map((workshopId) => path.join(dir, workshopId)).join(';');
     modList += ';' + Object.entries(config.includes).map(([modName, include]) => {
       const modId = config.workshopItems[modName];
       const includeDir = path.join(dir, modId);
