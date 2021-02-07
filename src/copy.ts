@@ -2,23 +2,32 @@ import sh from 'shelljs';
 import path from 'path';
 import { config, cacheDir } from './config';
 
-const now = (new Date()).valueOf();
+const [, , ...flags] = process.argv;
+const SYMLINK = flags.includes('symlink');
 
-const MOD_DIR = path.join(config.outDir, now.toString());
+const MOD_DIR = SYMLINK
+  ? path.join(config.outDir, 'mods')
+  : path.join(config.outDir, (new Date()).valueOf().toString());
 const MOD_LIST = path.join(config.outDir, 'modlist');
 
-const [, , ...flags] = process.argv;
-const NO_COPY = flags.includes('no-copy');
-
 const clearMods = () => {
-  sh.rm('-rf', config.outDir);
+  sh.rm('-rf', SYMLINK ? MOD_DIR : config.outDir);
   sh.mkdir('-p', MOD_DIR);
 };
 
+const getCacheModDir = (id: string) => path.join(cacheDir, 'steamapps', 'workshop', 'content', config.appid, id);
+
 const copyMods = () => {
   Object.entries(config.workshopItems).forEach(([name, id]) => {
+    const cacheModLocation = getCacheModDir(id);
     const modDir = path.join(MOD_DIR, name);
-    sh.cp('-r', path.join(cacheDir, 'steamapps', 'workshop', 'content', config.appid, id), modDir);
+
+    if (SYMLINK) {
+      sh.ln('-f', cacheModLocation, modDir);
+    } else {
+      sh.cp('-r', cacheModLocation, modDir);
+    }
+
     sh.ShellString(`${modDir};`).toEnd(MOD_LIST);
     sh.echo(`Installed mod: ${name}`);
   });
@@ -26,38 +35,33 @@ const copyMods = () => {
 
 const moveIncludes = () => {
   Object.entries(config.includes).forEach(([parentMod, children]) => {
+    const parentModId = config.workshopItems[parentMod];
+    const parentModDir = getCacheModDir(parentModId);
+
     children.forEach((childLocation) => {
-      const childPath = path.join(MOD_DIR, parentMod, childLocation);
-      sh.mv(childPath, MOD_DIR);
-      sh.echo(`Included mod: ${childLocation}`);
+      const childPath = path.join(parentModDir, ...childLocation);
+      const childName = childLocation.pop();
+
+      if (SYMLINK) {
+        sh.ln('-f', childPath, path.join(MOD_DIR, childName));
+      } else {
+        sh.cp('-r', childPath, path.join(MOD_DIR, childName));
+      }
+      sh.echo(`Included mod: ${childName}`);
     })
   });
 };
 
 const generateModlist = () => {
   sh.touch(MOD_LIST);
-  let modList = '-mod=';
-
-  if (NO_COPY) {
-    const dir = path.join(cacheDir, 'steamapps', 'workshop', 'content', config.appid);
-    modList += Object.values(config.workshopItems).map((workshopId) => path.join(dir, workshopId)).join(';');
-    modList += ';' + Object.entries(config.includes).map(([modName, include]) => {
-      const modId = config.workshopItems[modName];
-      const includeDir = path.join(dir, modId);
-      return include.map((includeEntry) => path.join(includeDir, includeEntry)).join(';');
-    }).join(';');
-  } else {
-    modList += sh.ls(MOD_DIR).map((name) => path.join(MOD_DIR, name)).join(';');
-  }
+  const modList = '-mod=' + sh.ls(MOD_DIR).map((name) => path.join(MOD_DIR, name)).join(';');
   sh.ShellString(modList).to(MOD_LIST);
 };
 
 const copy = () => {
-  if (!NO_COPY) {
-    clearMods();
-    copyMods();
-    moveIncludes();
-  }
+  clearMods();
+  copyMods();
+  moveIncludes();
   generateModlist();
 };
 

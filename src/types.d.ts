@@ -1,5 +1,5 @@
 type WorkshopItems = Record<string, string>;
-type Includes = Record<keyof WorkshopItems, string[]>;
+type Includes = Record<keyof WorkshopItems, string[][]>;
 
 interface IConfig {
   username: string;
