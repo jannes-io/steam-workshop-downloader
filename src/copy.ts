@@ -54,7 +54,9 @@ const moveIncludes = () => {
 
 const generateModlist = () => {
   sh.touch(MOD_LIST);
-  const modList = '-mod=' + sh.ls(MOD_DIR).map((name) => path.join(MOD_DIR, name)).join(';');
+  const modList = SYMLINK
+    ? '-mod=' + sh.ls(MOD_DIR).map((name) => path.join('mods', name)).join(';')
+    : '-mod=' + sh.ls(MOD_DIR).map((name) => path.join(MOD_DIR, name)).join(';');
   sh.ShellString(modList).to(MOD_LIST);
 };
 
