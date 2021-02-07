@@ -23,7 +23,7 @@ const copyMods = () => {
     const modDir = path.join(MOD_DIR, name);
 
     if (SYMLINK) {
-      sh.ln('-f', cacheModLocation, modDir);
+      sh.ln('-sf', cacheModLocation, modDir);
     } else {
       sh.cp('-r', cacheModLocation, modDir);
     }
