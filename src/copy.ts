@@ -43,7 +43,7 @@ const moveIncludes = () => {
       const childName = childLocation.pop();
 
       if (SYMLINK) {
-        sh.ln('-f', childPath, path.join(MOD_DIR, childName));
+        sh.ln('-sf', childPath, path.join(MOD_DIR, childName));
       } else {
         sh.cp('-r', childPath, path.join(MOD_DIR, childName));
       }
