@@ -13,6 +13,7 @@ Originally crafted by [J.Drake](https://3rdinf.us/perscom/personnel/soldier/418-
 ## Features
 - Automatically download Steam workshop items,
 - Completely cross-platform compatible thanks to Node,
+- All files are automatically lowercase for linux servers,
 - Only download items that were updated since last run,
 - Automatic Arma3Server command line generator,
 - No bullshit with Arma3Server locking the mods, all mods save to timestamped directories,
@@ -36,6 +37,8 @@ npm run build
 
 #### Running
 Run `npm run sync` inside of this folder to start downloading your selected workshop items.
+
+Include the `symlink` option if you wish to create a symlink from the steamCMD folder to the target directory instead of copying (`npm run sync symlink`). This will improve performance immensely, and saves on storage space. The downside is that this will not create a timestamped directory, and therefor will overwrite the mod directory.
 
 #### Using modlist for Arma 3 Server
 Instead of having `-mod=@mod1;@mod2` as launch param, use `-par=<outDir from config.json>\modlist` 
