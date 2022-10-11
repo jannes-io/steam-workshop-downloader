@@ -48,8 +48,8 @@ C:\Arma3\Servers\Server1\arma3server_64.exe -port=2302 -config=config\server.cfg
 ```
 
 ## Configuration
-We highly recommend running this script on an isolated steam account rather than a personal account.
-You must also **either disable steam guard, or run and log in to steamcmd at least once** to cache the steam guard code.
+We highly recommend running this script on an isolated steam account rather than a personal account if you plan on deploying this to a server. Your credentials will be visible to anyone that has access to this file.
+You must also **either disable steam guard, or run and log in to steamcmd at least once** to cache the steam guard code. Steam also requires that you own a copy of the game to prevent pirating.
 
 Here you can find an example for cba and ace.
 ```json
